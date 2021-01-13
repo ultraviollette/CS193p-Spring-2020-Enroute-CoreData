@@ -72,6 +72,9 @@ struct FlightList: View {
     @FetchRequest var flights: FetchedResults<Flight>
     
     init(_ flightSearch: FlightSearch) {
+        // let request = NSFetchRequest<Flight>(entityName: "Flight")
+        // request.predicate = NSPredicate(format: "destination_ = %@", flightSearch.destination)
+        // request.sortDescriptors = [NSSortDescriptor(key: "arrival_", ascending: true)]
         let request = Flight.fetchRequest(flightSearch.predicate)
         _flights = FetchRequest(fetchRequest: request)
     }

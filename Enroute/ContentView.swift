@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Enroute
 //
-//  Created by 이향원 on 2021-01-12.
+//  Created by Miel on 2021-01-12.
 //
 
 import SwiftUI

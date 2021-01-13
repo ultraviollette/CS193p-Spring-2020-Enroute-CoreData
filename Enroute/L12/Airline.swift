@@ -9,7 +9,7 @@
 import CoreData
 import Combine
 
-extension Airline: Identifiable, Comparable {
+extension Airline:  Comparable {
     static func withCode(_ code: String, in context: NSManagedObjectContext) -> Airline {
         let request = fetchRequest(NSPredicate(format: "code_ = %@", code))
         let results = (try? context.fetch(request)) ?? []
@@ -29,7 +29,7 @@ extension Airline: Identifiable, Comparable {
             return airline
         }
     }
-
+    
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Airline> {
         let request = NSFetchRequest<Airline>(entityName: "Airline")
         request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
@@ -54,9 +54,9 @@ extension Airline: Identifiable, Comparable {
         set { flights_ = newValue as NSSet }
     }
     var friendlyName: String { shortname.isEmpty ? name : shortname }
-
+    
     public var id: String { code }
-
+    
     public static func < (lhs: Airline, rhs: Airline) -> Bool {
         lhs.name < rhs.name
     }

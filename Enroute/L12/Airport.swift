@@ -2,14 +2,22 @@
 //  Airport.swift
 //  Enroute
 //
-//  Created by SK Ruban on 25/7/20.
-//  Copyright © 2020 SK Ruban. All rights reserved.
+//  Created by Miel on 2021-01-12.
 //
 
 import CoreData
 import Combine
+import MapKit
 
-extension Airport: Identifiable, Comparable {
+extension Airport: MKAnnotation {
+    public var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    public var title: String? { name ?? icao }
+    public var subtitle: String? { location }
+}
+
+extension Airport:  Comparable {
     static func withICAO(_ icao: String, context: NSManagedObjectContext) -> Airport {
         
         // look up ICAO in CoreData
@@ -67,7 +75,7 @@ extension Airport: Identifiable, Comparable {
     }
     
     public var id: String { icao }
-
+    
     public static func < (lhs: Airport, rhs: Airport) -> Bool {
         lhs.location ?? lhs.friendlyName < rhs.location ?? rhs.friendlyName
     }
